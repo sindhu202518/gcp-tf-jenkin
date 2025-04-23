@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git "https://${GIT_TOKEN}@github.com/sindhu202518/auto-tf.git"
+                git "https://${GIT_TOKEN}@github.com/sindhu202518/gcp-tf-jenkin.git"
             }
         }
         stage('Terraform Init') {
