@@ -9,7 +9,7 @@ pipeline {
             steps {
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: '*/main']],
+                    branches: [[name: '*/master']],
                     userRemoteConfigs: [[url: 'https://github.com/sindhu202518/gcp-tf-jenkin.git', credentialsId: 'git-token']]
                 ])
             }
