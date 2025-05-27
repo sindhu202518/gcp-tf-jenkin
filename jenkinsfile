@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
-        GIT_TOKEN = credentials('g-token')
+        GIT_TOKEN = credentials('git-token')
     }
     stages {
         stage('Git Checkout') {
@@ -10,7 +10,7 @@ pipeline {
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: '*/master']],
-                    userRemoteConfigs: [[url: 'https://github.com/sindhu202518/gcp-tf-jenkin.git', credentialsId: 'g-token']]
+                    userRemoteConfigs: [[url: 'https://github.com/sindhu202518/gcp-tf-jenkin.git', credentialsId: 'git-token']]
                 ])
             }
         }
