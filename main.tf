@@ -1,6 +1,6 @@
 variable "bucket_names" {
   type    = list(string)
-  default = ["tt-githubdemo-bucket-001", "tt-githubdemo-bucket-002"]
+  default = ["tt-bucket-001", "tt-bucket-002"]
 }
 
 resource "google_storage_bucket" "my_bucket" {
