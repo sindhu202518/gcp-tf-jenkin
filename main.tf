@@ -4,5 +4,7 @@ lifecycle {
     create_before_destroy = true
   project       = "auto-project1-461104"
   location      = "asia-south1"
+  }
 }
 #
+
