@@ -2,12 +2,16 @@ pipeline {
     agent any
     environment {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
-  GIT_TOKEN = credentials('git-token')
+        GIT_TOKEN = credentials('git-token')
     }
     stages {
         stage('Git Checkout') {
             steps {
-                git "https://${GIT_TOKEN}@github.com/sindhu202518/gcp-tf-jenkin.git"
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/sindhu202518/gcp-tf-jenkin.git', credentialsId: 'git-token']]
+                ])
             }
         }
         stage('Terraform Init') {
@@ -17,12 +21,13 @@ pipeline {
         }
         stage('Terraform Plan') {
             steps {
+                sh 'terraform validate'
                 sh 'terraform plan -out=tfplan'
             }
         }
         stage('Manual Approval') {
             steps {
-                input "approve?"
+                input message: 'Approve Terraform deployment?', ok: 'Proceed'
             }
         }
         stage('Terraform Apply') {
@@ -31,5 +36,4 @@ pipeline {
             }
         }
     }
-   }
 }
