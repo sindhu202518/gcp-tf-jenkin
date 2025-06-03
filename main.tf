@@ -4,7 +4,7 @@ provider "google" {
 }
 resource "google_compute_instance" "vm_instance" {
   name         = "my-vm01"
-  machine_type = "n1-standard-1"
+  machine_type = "e2-medium"
   zone         = "asia-south1-a"
 
   boot_disk {
