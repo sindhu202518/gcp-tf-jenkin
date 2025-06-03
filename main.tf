@@ -2,10 +2,16 @@ provider "google" {
   project = "auto-project1-461104"
   region  = "asia-south1"
 }
+variable "vm_names" {
+  type    = list(string)
+  default = ["my-vm101", "my-vm102"]
+}
+
 resource "google_compute_instance" "vm_instance" {
-  name         = "my-vm01"
+  for_each    = toset(var.vm_names)
+  name        = each.value
   machine_type = "e2-medium"
-  zone         = "asia-south1-a"
+  zone        = "asia-south1-a"
 
   boot_disk {
     initialize_params {
